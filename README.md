@@ -62,7 +62,7 @@ All the details of the models and how they were trained can be found in the note
 
 # Results
 
-To sum up, here is a table for the different methods used in this work :
+To sum up, here is a table of results for the different models used in this project :
 
 model name | metric on train set | metric on dev set
 --- | --- | ---
