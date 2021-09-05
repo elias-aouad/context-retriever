@@ -52,9 +52,9 @@ Once I compute this metrics for all queries, I simply take the average which giv
 
 - BM25
 - TF-IDF: In this pipeline, I tried two approaches : raw text and preprocessed text. The preprocessed text refers to a removal of stop words and stemming of the words in the text.
-- BERT : In this pipeline, I tried two approaches : First, I used original BERT, extracted all the CLS hidden states for each layer, and computed similarities using dot products between queries and passages. I deduced tat layer 5 is the most suited for the task. Then, I finetuned teh first 5 layers of BERT on the task, using the cosine similarity as a loss (using positive and negative pairs to avoid overfitting), and again computed similarities.
+- BERT : In this pipeline, I tried two approaches : First, I used original BERT, extracted all the CLS hidden states for each layer, and computed similarities using dot products between queries and passages. I deduced that layer 5 is the most suited for the task. Then, I finetuned the first 5 layers of BERT on the task, using the cosine similarity as a loss (using positive and negative pairs to avoid overfitting), and again computed similarities.
 
-All the details of the models can be found in the notebooks, the command line method is just for testing the models on a specific query or set.
+All the details of the models and how they were trained can be found in the notebooks, the command line method is just for testing the models on a specific query or set.
 
 
 # Results
