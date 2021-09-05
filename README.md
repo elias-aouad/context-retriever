@@ -10,9 +10,9 @@ pip install -r requirements.txt
 To run the context retriever, you must first choose a query.
 
 For that, you can either:
-    - choose a set (ex : train or dev)
-    - choose a sample from a set (ex : train[2] or dev[7] or ...)
-    - choose a new query (ex : football ...)
+- choose a set (ex : train or dev)
+- choose a sample from a set (ex : train[2] or dev[7] or ...)
+- choose a new query (ex : football ...)
 
 Three different models are implemented here :
 
