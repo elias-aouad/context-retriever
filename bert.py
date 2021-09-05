@@ -12,6 +12,25 @@ from tqdm import tqdm
 from metrics import metric
 
 
+def resize_bert(bert, keep_layers):
+    state_dict = dict(bert.state_dict())
+    new_state_dict = {}
+    
+    for elem in state_dict:
+        if "layer" in elem:
+            elem_split = elem.split(".")
+            layer_num = int(elem_split[elem_split.index("layer") + 1])
+            
+            if layer_num >= keep_layers:
+                continue
+        new_state_dict[elem] = state_dict[elem]
+    
+    config = bert.config; config.num_hidden_layers = keep_layers
+    new_bert = BertModel(config)
+    new_bert.load_state_dict(new_state_dict)
+    
+    return new_bert
+
 
 def get_extended_attention_mask(attention_mask, input_shape, device=torch.device('cpu')):
     if attention_mask.dim() == 3:
@@ -51,13 +70,20 @@ def run_bert(queries, corpus, corpus_cls_hidden_state_path, true_passage, WEIGHT
     cls_passage_hidden_state = torch.load("finetuned_cls_passage_hidden_state.pt", map_location="cpu")
     
     # define model for encoding text
-    config = BertConfig(num_hidden_layers=5)
-    bert = BertModel(config)
-    model = SentenceEncoder(bert)
-    model.load_state_dict(torch.load(WEIGHTS_PATH, map_location="cpu"))
-    model.to(device)
-    model.eval()
-    
+    try:
+        config = BertConfig(num_hidden_layers=5)
+        bert = BertModel(config)
+        model = SentenceEncoder(bert)
+        model.load_state_dict(torch.load(WEIGHTS_PATH, map_location="cpu"))
+        model.to(device)
+        model.eval()
+    except:
+        bert = BertModel.from_pretrained("bert-base-uncased")
+        resized_bert = resize_bert(bert, 5)
+        model = SentenceEncoder(resized_bert)
+        model.to(device)
+        model.eval()
+        
     # define tokenizer
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
     
