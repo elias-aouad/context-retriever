@@ -42,6 +42,6 @@ Hence, we can sort the document according to their scores, the first one being t
 
 In this work, I will evaluate my predictions as follows :
 
-$$ \text{metric} = 0.9^{i}$$
+![\Large metric = 0.9^i](https://latex.codecogs.com/svg.latex?\Large&space;metric=0.9^i) 
 
-with $i$ being the index of the true document similar to the query
+with i being the index of the true document similar to the query
