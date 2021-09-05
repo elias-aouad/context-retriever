@@ -40,8 +40,31 @@ python context-retriever.py --model bert --query train[0]
 For each document, the method will calculate a score which should evaluate the similarity between the query and the document.
 Hence, we can sort the document according to their scores, the first one being the most similar, and the last one being the least similar.
 
-In this work, I will evaluate my predictions as follows :
+Hence, in training mode, if we know which document is the real context of the query, then a good assessment to the prediction is to keep track of the index of the true context.
 
-![\Large metric = 0.9^i](https://latex.codecogs.com/svg.latex?\Large&space;metric=0.9^i) 
+Hence, per prediction, the prediction metric will be evaluated as 0.9^index , which will be equal to :
+- 1 if the model outputted the real context as the most similar document to the query (index=0)
+- 0 if the model outputted the real context as the not very similar document to the query (index >> 1)
 
-with i being the index of the true document similar to the query
+Once I compute this metrics for all queries, I simply take the average which gives me a metric for the performance on the set.
+
+# Different models
+
+- BM25
+- TF-IDF: In this pipeline, I tried two approaches : raw text and preprocessed text. The preprocessed text refers to a removal of stop words and stemming of the words in the text.
+- BERT : In this pipeline, I tried two approaches : First, I used original BERT, extracted all the CLS hidden states for each layer, and computed similarities using dot products between queries and passages. I deduced tat layer 5 is the most suited for the task. Then, I finetuned teh first 5 layers of BERT on the task, using the cosine similarity as a loss (using positive and negative pairs to avoid overfitting), and again computed similarities.
+
+All the details of the models can be found in the notebooks, the command line method is just for testing the models on a specific query or set.
+
+
+# Results
+
+To sum up, here is a table for the different methods used in this work :
+
+| model name | metric on train set | metric on dev set |
+| BM25 | 0.37 | 0.39 |
+| TF-IDF (no preprocess) | 0.70 | 0.64|
+| TF-IDF (with preprocess) | 0.69 | 0.65 |
+| BERT (5th layer) | 0.15 | 0.13 |
+| BERT finetuned | 0.34 | 0.18 |
+
