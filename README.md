@@ -62,6 +62,7 @@ All the details of the models and how they were trained can be found in the note
 To sum up, here is a table for the different methods used in this work :
 
 model name | metric on train set | metric on dev set
+--- | --- | ---
 BM25 | 0.37 | 0.39
 TF-IDF (no preprocess) | 0.70 | 0.64
 TF-IDF (with preprocess) | 0.69 | 0.65
