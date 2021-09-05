@@ -40,13 +40,16 @@ python context-retriever.py --model bert --query train[0]
 For each document, the method will calculate a score which should evaluate the similarity between the query and the document.
 Hence, for each query, we can sort the documents according to their scores, the first one being the most similar, and the last one being the least similar.
 
-Hence, in training mode, if we know which document is the real context of the query, then a good assessment to the prediction is to keep track of the index of the true context in the sorted array of documents.
+Hence, in training mode, if we know which document is the real context of the query, then a good assessment to the prediction is to keep track of the index of the true context in the sorted array of documents according to their similarity score.
 
 For each query, the metric will be evaluated as 0.9^index , which will be equal to :
 - 1 if the model outputted the real context as the most similar document to the query (index=0)
-- 0 if the model outputted the real context as the not very similar document to the query (index >> 1)
+- 0 if the model outputted the real context as a not very similar document to the query (index >> 1)
 
 Once I compute this metric for all queries, I simply take the average which gives me a metric for the performance on the entire set.
+
+
+PS : I could have also used a top-k passage metric, which measures the number of queries for which the real context was in the top-k best predictions, but this metric is more generalisable : it provides weighted values for each prediction, instead of just ones and zeros if the real context is in the top-k or not.
 
 # Different models
 
