@@ -61,16 +61,16 @@ All the details of the models and how they were trained can be found in the note
 
 To sum up, here is a table for the different methods used in this work :
 
-| model name | metric on train set | metric on dev set |
-| BM25 | 0.37 | 0.39 |
-| TF-IDF (no preprocess) | 0.70 | 0.64|
-| TF-IDF (with preprocess) | 0.69 | 0.65 |
-| BERT (5th layer) | 0.15 | 0.13 |
-| BERT finetuned | 0.34 | 0.18 |
-
-
-Attempt | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | #11
---- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
-Seconds | 301 | 283 | 290 | 286 | 289 | 285 | 287 | 287 | 272 | 276 | 269
+model name | metric on train set | metric on dev set
+--- | --- | ---
+BM25 | 0.37 | 0.39
+--- | --- | ---
+TF-IDF (no preprocess) | 0.70 | 0.64
+--- | --- | ---
+TF-IDF (with preprocess) | 0.69 | 0.65
+--- | --- | ---
+BERT (5th layer) | 0.15 | 0.13
+--- | --- | ---
+BERT finetuned | 0.34 | 0.18
 
 
