@@ -33,3 +33,15 @@ python context-retriever.py --model bm25 --query train[0]
 ```python
 python context-retriever.py --model bert --query train[0]
 ```
+
+
+# Metric
+
+For each document, the method will calculate a score which should evaluate the similarity between the query and the document.
+Hence, we can sort the document according to their scores, the first one being the most similar, and the last one being the least similar.
+
+In this work, I will evaluate my predictions as follows :
+
+$$ \text{metric} = 0.9^{i}$$
+
+with $i$ being the index of the true document similar to the query
